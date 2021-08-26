@@ -93,6 +93,7 @@ class EmployeeCrudController extends CrudController
         CRUD::addField(['name' => 'project_name', 'type' => 'text']);
         CRUD::addField(['name' => 'not', 'type' => 'text']);
 
+
         CRUD::addField(['label' => "Image", 'name' => "image", 'type' => 'image', 'crop' => true, 'aspect_ratio' => 1,]);
         CRUD::addField(['name' => "CV", 'type' => 'upload','upload'=> true,]);
         CRUD::addField(['name' => "self_doc", 'type' => 'upload','upload'=> true,]);
