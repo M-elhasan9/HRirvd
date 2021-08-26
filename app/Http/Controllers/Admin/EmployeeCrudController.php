@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\EmployeeRequest;
 use App\Models\Country;
+use App\Models\Position;
+use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Faker\Provider\Image;
@@ -81,10 +83,23 @@ class EmployeeCrudController extends CrudController
             }),]);
 
         CRUD::addField(['name' => 'phone', 'type' => 'text']);
-        CRUD::addField(['name' => 'department', 'type' => 'text']);
-        CRUD::addField(['name' => 'position', 'type' => 'text']);
+        CRUD::addField(['name' => 'department', 'type' => 'select_from_array','options'=> ['M&E' => 'M&E', 'HR' => 'HR',
+            'Program' => 'Program','Media' => 'Media','logistic' => 'logistic','Finance' => 'Finance','Operation' => 'Operation','allows_null' => false,],]);
+
+        CRUD::addField(['name' => 'positions', 'label' => "Position", 'type' => 'select',
+            'entity' => 'positions', Position::class => "App\Models\Position",
+            'attribute' => 'position', (function ($query) {
+                return $query->orderBy('name', 'ASC')->get();
+            }),]);
+
         CRUD::addField(['name' => 'supervisior', 'type' => 'text']);
-        CRUD::addField(['name' => 'hr', 'type' => 'text']);
+
+        CRUD::addField(['name' => 'hrs', 'label' => "HR", 'type' => 'select',
+            'entity' => 'hrs', User::class => "App\Models\User",
+            'attribute' => 'name', (function ($query) {
+                return $query->orderBy('name', 'ASC')->get();
+            }),]);
+
         CRUD::addField(['name'=> 'contract_type', 'type'=> 'select_from_array', 'options'=> ['Full Time' => 'Full Time', 'Part Time' => 'Part Time'],]);
         CRUD::addField(['name' => 'salary', 'type' => 'number']);
         CRUD::addField(['name' => 'is_active', 'type' => 'checkbox']);
@@ -95,6 +110,7 @@ class EmployeeCrudController extends CrudController
 
 
         CRUD::addField(['label' => "Image", 'name' => "image", 'type' => 'image', 'crop' => true, 'aspect_ratio' => 1,]);
+        CRUD::addField(['name' => "Id_card", 'type' => 'upload','upload'=> true,]);
         CRUD::addField(['name' => "CV", 'type' => 'upload','upload'=> true,]);
         CRUD::addField(['name' => "self_doc", 'type' => 'upload','upload'=> true,]);
 

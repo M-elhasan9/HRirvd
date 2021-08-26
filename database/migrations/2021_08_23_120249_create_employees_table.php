@@ -22,9 +22,12 @@ class CreateEmployeesTable extends Migration
             $table->string('city')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
+
             $table->string('image')->nullable();
+            $table->string('Id_card')->nullable();
             $table->string('cv')->nullable();
             $table->string('self_doc')->nullable();
+
             $table->string('department')->nullable();
             $table->string('position')->nullable();
             $table->string('supervisior')->nullable();

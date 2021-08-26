@@ -47,6 +47,15 @@ class Employee extends Model
         $cities = $this->belongsTo(Country::class);
         return $cities;
     }
+    public function positions(){
+        $pos = $this->belongsTo(Position::class);
+        return $pos;
+    }
+    public function hrs(){
+        $hr = $this->belongsTo(User::class);
+        return $hr;
+    }
+
 
     /*
     |--------------------------------------------------------------------------
